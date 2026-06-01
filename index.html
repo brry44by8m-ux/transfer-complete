@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>สำเร็จ - กสิกรไทย</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-dark: #1a2b2e;
+      --bg-card: #1e3035;
+      --bg-section: #243438;
+      --teal: #4ecdc4;
+      --teal-light: #6ee7df;
+      --text-white: #f0f4f4;
+      --text-muted: #8aa8ac;
+      --text-label: #7a9ea3;
+      --divider: rgba(255,255,255,0.08);
+    }
+
+    html, body {
+      height: 100%;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Sarabun', sans-serif;
+    }
+
+    .phone-frame {
+      width: 375px;
+      min-height: 812px;
+      background: var(--bg-dark);
+      border-radius: 44px;
+      overflow: hidden;
+      position: relative;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08),
+        0 40px 80px rgba(0,0,0,0.7),
+        inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+
+    /* Status bar */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 28px 0;
+      height: 44px;
+    }
+    .status-time { font-size: 15px; font-weight: 600; color: var(--text-white); }
+    .status-icons { display: flex; gap: 6px; align-items: center; }
+    .status-icons svg { width: 17px; height: 12px; fill: var(--text-white); }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 20px 24px 0;
+    }
+    .header-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-white);
+      letter-spacing: 0.01em;
+    }
+    .header-btn {
+      position: absolute;
+      right: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .header-btn svg { width: 22px; height: 22px; stroke: var(--text-muted); fill: none; stroke-width: 1.8; }
+
+    /* Check icon */
+    .check-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 0 20px;
+    }
+    .check-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2.5px solid var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    .check-circle::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px solid rgba(78,205,196,0.15);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.4); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .check-svg { width: 32px; height: 32px; stroke: var(--teal); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .check-svg path { stroke-dasharray: 50; stroke-dashoffset: 50; animation: draw 0.4s 0.3s ease forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+
+    .check-label {
+      margin-top: 14px;
+      font-size: 15px;
+      color: var(--text-muted);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    /* Divider */
+    .divider { height: 1px; background: var(--divider); margin: 0 24px; }
+
+    /* Amount section */
+    .amount-section {
+      padding: 20px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .label {
+      font-size: 14px;
+      color: var(--text-label);
+      font-weight: 400;
+    }
+    .value {
+      font-size: 14px;
+      color: var(--text-white);
+      font-weight: 400;
+    }
+    .value.teal {
+      color: var(--teal);
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    /* Info section */
+    .info-section {
+      padding: 18px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-white);
+      margin-bottom: 4px;
+      margin-top: 2px;
+    }
+
+    /* Button */
+    .btn-wrap {
+      padding: 24px 28px 32px;
+    }
+    .btn-confirm {
+      width: 100%;
+      padding: 16px;
+      background: var(--teal);
+      border: none;
+      border-radius: 50px;
+      font-family: 'Sarabun', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a2b2e;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-confirm:hover { background: var(--teal-light); }
+    .btn-confirm:active { transform: scale(0.98); }
+
+    /* Home indicator */
+    .home-indicator {
+      display: flex;
+      justify-content: center;
+      padding: 0 0 8px;
+    }
+    .home-bar {
+      width: 134px;
+      height: 5px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 3px;
+    }
+
+    /* Subtle mesh background on card */
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(78,205,196,0.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .phone-frame > * { position: relative; z-index: 1; }
+  </style>
+</head>
+<body>
+
+<div class="phone-frame">
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <span class="status-time">9:41</span>
+    <div class="status-icons">
+      <!-- Signal -->
+      <svg viewBox="0 0 17 12" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="7" width="3" height="5" rx="0.5"/>
+        <rect x="4.5" y="4.5" width="3" height="7.5" rx="0.5"/>
+        <rect x="9" y="2" width="3" height="10" rx="0.5"/>
+        <rect x="13.5" y="0" width="3" height="12" rx="0.5"/>
+      </svg>
+      <!-- WiFi -->
+      <svg viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 10.5a1 1 0 100-2 1 1 0 000 2z" fill="white"/>
+        <path d="M4.5 7.5a5 5 0 017 0" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M1.5 4.5a9 9 0 0113 0" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <!-- Battery -->
+      <svg viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:25px;height:12px">
+        <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="white" stroke-opacity="0.35"/>
+        <rect x="2" y="2" width="17" height="8" rx="2" fill="white"/>
+        <path d="M23 4v4a2 2 0 000-4z" fill="white" fill-opacity="0.4"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="header">
+    <span class="header-title">สำเร็จ</span>
+    <button class="header-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="9"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Check Icon -->
+  <div class="check-wrap">
+    <div class="check-circle">
+      <svg class="check-svg" viewBox="0 0 32 32">
+        <path d="M7 16l7 7 11-11"/>
+      </svg>
+    </div>
+    <span class="check-label">ตรวจสอบรายการสำเร็จ</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Amount -->
+  <div class="amount-section">
+    <div class="row">
+      <span class="label">จำนวน:</span>
+      <span class="value teal">49,805.50 บาท</span>
+    </div>
+    <div class="row">
+      <span class="label">ค่าธรรมเนียม:</span>
+      <span class="value">0.00 บาท</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Transaction Info -->
+  <div class="info-section">
+    <div class="row">
+      <span class="label">วันที่ทำรายการ:</span>
+      <span class="value">1 มิ.ย. 69</span>
+    </div>
+    <div class="row">
+      <span class="label">เวลาที่ทำรายการ:</span>
+      <span class="value">11:43:06 น.</span>
+    </div>
+    <div class="row">
+      <span class="label">เลขที่ทำรายการ:</span>
+      <span class="value" style="font-size:13px;">Ac181fe2f1ef44245</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- From -->
+  <div class="info-section">
+    <div class="section-title">จาก</div>
+    <div class="row">
+      <span class="label">ชื่อบัญชี:</span>
+      <span class="value">นายดิฐนันท์ ประเสริฐไพฑูรย์</span>
+    </div>
+    <div class="row">
+      <span class="label">เลขบัญชี:</span>
+      <span class="value">XXX-X-XX524-6</span>
+    </div>
+    <div class="row">
+      <span class="label">ธนาคาร:</span>
+      <span class="value">กรุงไทย</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- To -->
+  <div class="info-section">
+    <div class="section-title">ไปยัง</div>
+    <div class="row">
+      <span class="label">ชื่อบัญชี:</span>
+      <span class="value">นางสาว คณพร นุ้ยหงษ์</span>
+    </div>
+    <div class="row">
+      <span class="label">เลขบัญชี:</span>
+      <span class="value">XXX-X-XX464-6</span>
+    </div>
+    <div class="row">
+      <span class="label">ธนาคาร:</span>
+      <span class="value">ไทยพาณิชย์</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Button -->
+  <div class="btn-wrap">
+    <button class="btn-confirm">ตกลง</button>
+  </div>
+
+  <!-- Home Indicator -->
+  <div class="home-indicator">
+    <div class="home-bar"></div>
+  </div>
+
+</div>
+
+</body>
+</html>
